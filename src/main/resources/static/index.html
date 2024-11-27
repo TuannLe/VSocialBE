@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+
+<div>
+    <h2>Chat</h2>
+    <div id="messageArea"></div> <!-- Nơi hiển thị tin nhắn -->
+    <input type="text" id="messageInput" placeholder="Nhập tin nhắn" />
+    <button onclick="sendMessage()">Gửi</button>
+</div>
+
+<script src="/js/main.js"></script> <!-- JavaScript xử lý logic WebSocket -->
+
+</body>
+</html>
