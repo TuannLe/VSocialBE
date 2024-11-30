@@ -63,7 +63,7 @@ public class AccountService implements IAccountService {
         return accountMapper.toAccountResponse(accountRepo.findById(accountId).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED)));
     }
 
-    @PreAuthorize("hasAuthority('GET_MY_INFO')")
+//    @PreAuthorize("hasAuthority('GET_MY_INFO')")
     @Override
     public AccountResponse getMyInfo() {
         var context = SecurityContextHolder.getContext();
