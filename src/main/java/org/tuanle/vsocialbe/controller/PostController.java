@@ -6,7 +6,9 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.AddPostRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
-import org.tuanle.vsocialbe.dto.response.PostReponse;
+import org.tuanle.vsocialbe.dto.response.PostResponse;
+import org.tuanle.vsocialbe.entity.Post;
+import org.tuanle.vsocialbe.service.interfaces.IPostService;
 
 import java.util.List;
 
@@ -15,23 +17,27 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PostController {
+    IPostService postService;
+
     @PostMapping
-    public APIResponse<PostReponse> createPost(@RequestBody AddPostRequest request) {
-        return null;
+    public APIResponse<Post> createPost(@ModelAttribute AddPostRequest request) {
+        return APIResponse.<Post>builder()
+                .result(postService.createPost(request))
+                .build();
     }
 
     @GetMapping("/{postId}")
-    public APIResponse<PostReponse> getPostById(@PathVariable String postId) {
+    public APIResponse<PostResponse> getPostById(@PathVariable String postId) {
         return null;
     }
 
     @GetMapping
-    public APIResponse<List<PostReponse>> getAllPost() {
+    public APIResponse<List<PostResponse>> getAllPost() {
         return null;
     }
 
     @PostMapping("/{postId}")
-    public APIResponse<PostReponse> updatePost(@PathVariable String postId, @RequestBody AddPostRequest request) {
+    public APIResponse<PostResponse> updatePost(@PathVariable String postId, @RequestBody AddPostRequest request) {
         return null;
     }
 

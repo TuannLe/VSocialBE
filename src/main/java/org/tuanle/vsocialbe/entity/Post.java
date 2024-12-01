@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_post")
@@ -34,4 +35,17 @@ public class Post {
 
     @Column(name = "status")
     private int status;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostImage> postImageList;
+
+    public Post(long postId, String content, Account createdBy, LocalDateTime createdAt, int audience, int status, List<PostImage> postImageList) {
+        this.postId = postId;
+        this.content = content;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt;
+        this.audience = audience;
+        this.status = status;
+        this.postImageList = postImageList;
+    }
 }

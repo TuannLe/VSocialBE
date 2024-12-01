@@ -17,27 +17,36 @@ public class PostImage {
     @EmbeddedId
     private PostImageId postImageId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("postId")
+    @JoinColumn(name = "post_id", insertable = false, updatable = false)
+    private Post post;
+
+    public PostImage(PostImageId postImageId, Post post) {
+        this.postImageId = postImageId;
+        this.post = post;
+    }
+
     @Embeddable
     public static class PostImageId implements Serializable {
-        @ManyToOne
-        @JoinColumn(name = "post_id")
-        private Post postId;
+        @Column(name = "post_id")
+        private long postId;
 
         @Column(name = "image")
         private String image;
 
         public PostImageId() {}
 
-        public PostImageId(Post postId, String image) {
+        public PostImageId(long postId, String image) {
             this.postId = postId;
             this.image = image;
         }
 
-        public Post getPostId() {
+        public long getPostId() {
             return postId;
         }
 
-        public void setPostId(Post postId) {
+        public void setPostId(long postId) {
             this.postId = postId;
         }
 
