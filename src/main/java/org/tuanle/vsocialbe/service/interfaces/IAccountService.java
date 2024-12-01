@@ -8,8 +8,6 @@ import org.tuanle.vsocialbe.entity.Account;
 import java.util.List;
 
 public interface IAccountService {
-    RegisterRequest login(RegisterRequest account);
-
     Account register(RegisterRequest request);
 
     List<AccountResponse> getAll();

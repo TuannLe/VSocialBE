@@ -29,6 +29,9 @@ public class Post {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "audience")
+    private int audience;
+
     @Column(name = "status")
     private int status;
 }

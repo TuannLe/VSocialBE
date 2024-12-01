@@ -4,9 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.tuanle.vsocialbe.dto.request.AccountUpdateRequest;
@@ -34,11 +32,6 @@ public class AccountService implements IAccountService {
     RoleRepo roleRepo;
 
     @Override
-    public RegisterRequest login(RegisterRequest account) {
-        return null;
-    }
-
-    @Override
     public Account register(RegisterRequest request) {
         if(accountRepo.existsByEmail(request.getEmail())){
             throw new AppException(ErrorCode.EMAIL_EXISTED);
@@ -51,7 +44,7 @@ public class AccountService implements IAccountService {
         return accountRepo.save(account);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public List<AccountResponse> getAll() {
         return accountRepo.findAll().stream().map(accountMapper::toAccountResponse).toList();

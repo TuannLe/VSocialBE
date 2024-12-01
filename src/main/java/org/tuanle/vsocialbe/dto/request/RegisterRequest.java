@@ -5,9 +5,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.tuanle.vsocialbe.validator.DobConstraint;
-
-import java.time.LocalDate;
 
 @Data
 @Builder
