@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.tuanle.vsocialbe.enums.RelationshipStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -19,41 +20,37 @@ public class Friend {
     private FriendId friendId;
 
     @Column(name = "status")
-    private int status;
+    private RelationshipStatus status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Embeddable
     public static class FriendId implements Serializable {
-        @ManyToOne
-        @JoinColumn(name = "sender_id")
-        private Account senderId;
+        private String senderId;
 
-        @ManyToOne
-        @JoinColumn(name = "receiver_id")
-        private Account receiverId;
+        private String receiverId;
 
         public FriendId() {}
 
-        public FriendId(Account senderId, Account receiverId) {
+        public FriendId(String senderId, String receiverId) {
             this.senderId = senderId;
             this.receiverId = receiverId;
         }
 
-        public Account getSenderId() {
+        public String getSenderId() {
             return senderId;
         }
 
-        public void setSenderId(Account senderId) {
+        public void setSenderId(String senderId) {
             this.senderId = senderId;
         }
 
-        public Account getReceiverId() {
+        public String getReceiverId() {
             return receiverId;
         }
 
-        public void setReceiverId(Account receiverId) {
+        public void setReceiverId(String receiverId) {
             this.receiverId = receiverId;
         }
 

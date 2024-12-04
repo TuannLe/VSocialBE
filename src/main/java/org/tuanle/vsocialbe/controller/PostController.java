@@ -18,7 +18,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PostController {
     IPostService postService;
-    private final PostRepo postRepo;
 
     @PostMapping
     public APIResponse<PostResponse> createPost(@ModelAttribute AddPostRequest request) {
