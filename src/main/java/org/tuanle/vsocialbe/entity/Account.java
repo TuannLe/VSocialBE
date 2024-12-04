@@ -6,15 +6,14 @@ import lombok.experimental.FieldDefaults;
 import org.tuanle.vsocialbe.validator.DobConstraint;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "tbl_account")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Account {
     @Id
@@ -56,7 +55,22 @@ public class Account {
     @ManyToMany
     Set<Role> roles;
 
-//    @OneToMany(mappedBy = "senderId", cascade = CascadeType.ALL)
+    public Account(String accountId, String email, String password, String username, String avatar, String coverPhoto, String address, String phoneNumber, LocalDate dateOfBirth, int otp, int status, Set<Role> roles) {
+        this.accountId = accountId;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.avatar = avatar;
+        this.coverPhoto = coverPhoto;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.otp = otp;
+        this.status = status;
+        this.roles = roles;
+    }
+
+    //    @OneToMany(mappedBy = "senderId", cascade = CascadeType.ALL)
 //    private Set<Friend> friendsRequested;
 //
 //    @OneToMany(mappedBy = "receiverId", cascade = CascadeType.ALL)

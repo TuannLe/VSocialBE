@@ -26,14 +26,13 @@ public class ApplicationInitConfig {
     ApplicationRunner applicationRunner(AccountRepo accountRepo) {
         return args -> {
             if(accountRepo.findByEmail("admin@gmail.com").isEmpty()){
-                var roles = new HashSet<Role>();
-                roles.add(Role.ADMIN);
-                Account account = Account.builder()
-                        .username("admin")
-                        .email("admin@gmail.com")
-//                        .roles(roles)
-                        .password(passwordEncoder.encode("admin"))
-                        .build();
+//                var roles = new <Role>();
+//                roles.add(Role.ADMIN);
+                Account account = new Account();
+                account.setUsername("admin");
+                account.setEmail("admin@gmail.com");
+                account.setPassword(passwordEncoder.encode("admin"));
+                accountRepo.save(account);
 
                 accountRepo.save(account);
                 log.warn("Admin has been created with default password: admin, please change it/");

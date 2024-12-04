@@ -19,7 +19,7 @@ public class PostImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("postId")
-    @JoinColumn(name = "post_id", insertable = false, updatable = false)
+    @JoinColumn(name = "post_id")
     private Post post;
 
     public PostImage(PostImageId postImageId, Post post) {

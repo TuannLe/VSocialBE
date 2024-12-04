@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.tuanle.vsocialbe.dto.request.AddPostRequest;
 import org.tuanle.vsocialbe.dto.response.PostResponse;
+import org.tuanle.vsocialbe.entity.Account;
 import org.tuanle.vsocialbe.entity.Post;
 import org.tuanle.vsocialbe.entity.PostImage;
 import org.tuanle.vsocialbe.exception.AppException;
@@ -32,11 +33,14 @@ public class PostService implements IPostService {
     PostImageRepo postImageRepo;
 
     @Override
-    public Post createPost(AddPostRequest request) {
+    public PostResponse createPost(AddPostRequest request) {
         try {
             Post post = postMapper.toPost(request);
             post.setStatus(1);
             post.setCreatedAt(LocalDateTime.now());
+            Account account = new Account();
+            account.setAccountId(request.getAccountId());
+            post.setCreatedBy(account);
             Post savedPost = postRepo.save(post);
 
             List<String> imageUrls = new ArrayList<>();
@@ -55,7 +59,7 @@ public class PostService implements IPostService {
 
             postImageRepo.saveAll(postImages);
 
-            return savedPost;
+            return postMapper.toPostResponse(savedPost);
         } catch (AppException | IOException e) {
             throw new AppException(ErrorCode.CREATE_POST_FAIL);
         }
@@ -63,12 +67,15 @@ public class PostService implements IPostService {
 
     @Override
     public PostResponse getPostById(String postId) {
-        return null;
+        return postMapper.toPostResponse(postRepo.findById(postId).orElseThrow(() -> new AppException(ErrorCode.POST_NOT_EXISTED)));
     }
 
     @Override
     public List<PostResponse> getAllPost() {
-        return List.of();
+        List<Post> posts = postRepo.findAll();
+        return posts.stream()
+                .map(postMapper::toPostResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -77,7 +84,9 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostResponse deletePost(String postId) {
-        return null;
+    public String deletePost(String postId) {
+        Post existedPost = postRepo.findById(postId).orElseThrow(() -> new AppException(ErrorCode.POST_NOT_EXISTED));
+        postRepo.delete(existedPost);
+        return "Post deleted successfully";
     }
 }

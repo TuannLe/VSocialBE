@@ -7,9 +7,9 @@ import org.tuanle.vsocialbe.entity.Post;
 import java.util.List;
 
 public interface IPostService {
-    Post createPost(AddPostRequest request);
+    PostResponse createPost(AddPostRequest request);
     PostResponse getPostById(String postId);
     List<PostResponse> getAllPost();
     PostResponse updatePost(String postId, AddPostRequest request);
-    PostResponse deletePost(String postId);
+    String deletePost(String postId);
 }

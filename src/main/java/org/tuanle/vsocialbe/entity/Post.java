@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Post {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="account_id")
     private Account createdBy;
 
@@ -37,7 +38,7 @@ public class Post {
     private int status;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostImage> postImageList;
+    private List<PostImage> postImageList = new ArrayList<>();
 
     public Post(long postId, String content, Account createdBy, LocalDateTime createdAt, int audience, int status, List<PostImage> postImageList) {
         this.postId = postId;

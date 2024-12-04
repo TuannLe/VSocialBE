@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.AddPostRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
 import org.tuanle.vsocialbe.dto.response.PostResponse;
-import org.tuanle.vsocialbe.entity.Post;
+import org.tuanle.vsocialbe.repositoty.PostRepo;
 import org.tuanle.vsocialbe.service.interfaces.IPostService;
 
 import java.util.List;
@@ -18,22 +18,27 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PostController {
     IPostService postService;
+    private final PostRepo postRepo;
 
     @PostMapping
-    public APIResponse<Post> createPost(@ModelAttribute AddPostRequest request) {
-        return APIResponse.<Post>builder()
+    public APIResponse<PostResponse> createPost(@ModelAttribute AddPostRequest request) {
+        return APIResponse.<PostResponse>builder()
                 .result(postService.createPost(request))
                 .build();
     }
 
     @GetMapping("/{postId}")
     public APIResponse<PostResponse> getPostById(@PathVariable String postId) {
-        return null;
+        return APIResponse.<PostResponse>builder()
+                .result(postService.getPostById(postId))
+                .build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public APIResponse<List<PostResponse>> getAllPost() {
-        return null;
+        return APIResponse.<List<PostResponse>>builder()
+                .result(postService.getAllPost())
+                .build();
     }
 
     @PostMapping("/{postId}")
@@ -43,6 +48,8 @@ public class PostController {
 
     @DeleteMapping("{postId}")
     public APIResponse<String> deletePost(@PathVariable String postId) {
-        return null;
+        return APIResponse.<String>builder()
+                .result(postService.deletePost(postId))
+                .build();
     }
 }
