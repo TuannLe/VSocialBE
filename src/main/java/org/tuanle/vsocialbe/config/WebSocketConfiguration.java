@@ -12,12 +12,18 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOrigins("http://localhost:5173").withSockJS();
+        registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS();
     }
 
+//    @Override
+//    public void configureMessageBroker(MessageBrokerRegistry config) {
+//        config.enableSimpleBroker("/topic", "/queue");
+//        config.setApplicationDestinationPrefixes("/app");
+//    }
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue");
-        config.setApplicationDestinationPrefixes("/app");
+        config.enableSimpleBroker("/user"); // Private messaging destination
+        config.setApplicationDestinationPrefixes("/app"); // Prefix for client-side send endpoints
+        config.setUserDestinationPrefix("/user"); // Prefix for private messages
     }
 }

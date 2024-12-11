@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IFriendService {
     String addFriend(FriendRequest request);
-    String acceptFriend(FriendRequest friendId);
-    String unFriend(FriendRequest friendId);
-    String blockFriend(FriendRequest friendId);
+    String acceptFriend(FriendRequest request);
+    String unFriend(FriendRequest request);
+    String blockFriend(FriendRequest request);
     List<String> getFriendsRequest();
 }

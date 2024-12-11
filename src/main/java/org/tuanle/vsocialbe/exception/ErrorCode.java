@@ -19,6 +19,7 @@ public enum ErrorCode {
     DOB_INVALID(1007, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
     CREATE_POST_FAIL(1008, "Create post failure", HttpStatus.BAD_REQUEST),
     POST_NOT_EXISTED(1009, "Post not existed.", HttpStatus.NOT_FOUND),
+    FRIEND_NOT_EXISTED(1010, "Friend request not existed.", HttpStatus.NOT_FOUND),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
