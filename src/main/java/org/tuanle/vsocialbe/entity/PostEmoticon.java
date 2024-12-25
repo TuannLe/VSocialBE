@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.tuanle.vsocialbe.enums.Emoticon;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,44 +13,54 @@ import java.util.Objects;
 @Table(name = "tbl_post_emoticon")
 @Getter
 @Setter
-@NoArgsConstructor
 public class PostEmoticon {
     @EmbeddedId
     private PostEmotionId postEmotionId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("postId")
+    @JoinColumn(name = "post_id")
+    private Post post;
+
     @Column(name = "emoticon")
-    private int emoticon;
+    private Emoticon emoticon;
+
+    public PostEmoticon() {}
+
+    public PostEmoticon(PostEmotionId postEmotionId, Post post, Emoticon emoticon) {
+        this.postEmotionId = postEmotionId;
+        this.post = post;
+        this.emoticon = emoticon;
+    }
 
     @Embeddable
     public static class PostEmotionId implements Serializable {
-        @ManyToOne
-        @JoinColumn(name = "post_id")
-        private Post postId;
+        @Column(name = "post_id")
+        private long postId;
 
-        @ManyToOne
-        @JoinColumn(name = "account_id")
-        private Account accountId;
+        @Column(name = "account_id")
+        private String accountId;
 
         public PostEmotionId() {}
 
-        public PostEmotionId(Post postId, Account accountId) {
+        public PostEmotionId(long postId, String accountId) {
             this.postId = postId;
             this.accountId = accountId;
         }
 
-        public Post getPostId() {
+        public long getPostId() {
             return postId;
         }
 
-        public void setPostId(Post postId) {
+        public void setPostId(long postId) {
             this.postId = postId;
         }
 
-        public Account getAccountId() {
+        public String getAccountId() {
             return accountId;
         }
 
-        public void setAccountId(Account accountId) {
+        public void setAccountId(String accountId) {
             this.accountId = accountId;
         }
 

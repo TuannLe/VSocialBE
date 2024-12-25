@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.tuanle.vsocialbe.enums.CommentStatus;
 
 import java.time.LocalDateTime;
 
@@ -28,6 +29,10 @@ public class PostComment {
     @JoinColumn(name ="account_id")
     private Account createdBy;
 
+    @ManyToOne
+    @JoinColumn(name ="post_id")
+    private Post postId;
+
     @Column(name = "status")
-    private int status;
+    private CommentStatus status;
 }

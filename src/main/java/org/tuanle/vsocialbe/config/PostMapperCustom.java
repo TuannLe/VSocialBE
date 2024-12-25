@@ -2,7 +2,6 @@ package org.tuanle.vsocialbe.config;
 
 import org.springframework.stereotype.Component;
 import org.tuanle.vsocialbe.dto.response.PostResponse;
-import org.tuanle.vsocialbe.entity.Account;
 import org.tuanle.vsocialbe.entity.Post;
 
 import java.util.Collections;

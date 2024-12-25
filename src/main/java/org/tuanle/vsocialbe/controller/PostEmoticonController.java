@@ -6,7 +6,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.PostEmoticonRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
-import org.tuanle.vsocialbe.dto.response.PostResponse;
 import org.tuanle.vsocialbe.service.interfaces.IPostEmoticonService;
 
 @RestController

@@ -40,7 +40,10 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostImage> postImageList = new ArrayList<>();
 
-    public Post(long postId, String content, Account createdBy, LocalDateTime createdAt, int audience, int status, List<PostImage> postImageList) {
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostEmoticon> postEmoticonList = new ArrayList<>();
+
+    public Post(long postId, String content, Account createdBy, LocalDateTime createdAt, int audience, int status, List<PostImage> postImageList, List<PostEmoticon> postEmoticonList) {
         this.postId = postId;
         this.content = content;
         this.createdBy = createdBy;
@@ -48,5 +51,6 @@ public class Post {
         this.audience = audience;
         this.status = status;
         this.postImageList = postImageList;
+        this.postEmoticonList = postEmoticonList;
     }
 }

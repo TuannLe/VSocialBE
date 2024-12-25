@@ -2,22 +2,21 @@ package org.tuanle.vsocialbe.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.tuanle.vsocialbe.enums.Emoticon;
+import org.tuanle.vsocialbe.entity.Account;
+import org.tuanle.vsocialbe.enums.CommentStatus;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PostResponse {
-    long postId;
-    String content;
-    AccountResponse createdBy;
+public class CommentResponse {
+    int commentId;
+    String comment;
     LocalDateTime createdAt;
-    int audience;
-    List<String> postImages;
-    List<Emoticon> emoticons;
+    Account createdBy;
+    long postId;
+    CommentStatus status;
 }
