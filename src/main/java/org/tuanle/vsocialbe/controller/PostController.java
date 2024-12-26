@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.AddPostRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
 import org.tuanle.vsocialbe.dto.response.PostResponse;
-import org.tuanle.vsocialbe.repositoty.PostRepo;
 import org.tuanle.vsocialbe.service.interfaces.IPostService;
 
 import java.util.List;
@@ -33,10 +32,17 @@ public class PostController {
                 .build();
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public APIResponse<List<PostResponse>> getAllPost() {
         return APIResponse.<List<PostResponse>>builder()
                 .result(postService.getAllPost())
+                .build();
+    }
+
+    @GetMapping("/acc/{accountId}")
+    public APIResponse<List<PostResponse>> getPostByUserID(@PathVariable String accountId) {
+        return APIResponse.<List<PostResponse>>builder()
+                .result(postService.getPostByAccountId(accountId))
                 .build();
     }
 

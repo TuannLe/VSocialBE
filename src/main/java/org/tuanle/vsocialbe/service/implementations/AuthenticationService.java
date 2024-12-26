@@ -122,6 +122,11 @@ public class AuthenticationService implements IAuthenticationService {
                 .build();
     }
 
+//    public String extractIdFromToken(String token) throws ParseException, JOSEException {
+//        var signToken = verifyToken(token, false);
+//        return signToken.getJWTClaimsSet().getClaims().toString();
+//    }
+
     private SignedJWT verifyToken(String token, boolean isRefresh) throws JOSEException, ParseException {
         JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
         SignedJWT signedJWT = SignedJWT.parse(token);
@@ -159,6 +164,7 @@ public class AuthenticationService implements IAuthenticationService {
             throw new RuntimeException(e);
         }
     }
+
 
     private String buildScope(Account account) {
         StringJoiner stringJoiner = new StringJoiner(" ");

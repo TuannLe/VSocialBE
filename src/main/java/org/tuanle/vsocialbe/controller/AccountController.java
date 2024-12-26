@@ -42,6 +42,13 @@ public class AccountController {
                 .build();
     }
 
+//    @PostMapping
+//    public APIResponse<String> check(@RequestBody String token) {
+//        return APIResponse.<String>builder()
+//                .result(accountService.getMyInfo())
+//                .build();
+//    }
+
     @GetMapping("/{accountId}")
     public AccountResponse getById(@PathVariable String accountId) {
         return accountService.getById(accountId);

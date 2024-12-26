@@ -9,6 +9,7 @@ public interface IPostService {
     PostResponse createPost(AddPostRequest request);
     PostResponse getPostById(String postId);
     List<PostResponse> getAllPost();
+    List<PostResponse> getPostByAccountId(String accountId);
     PostResponse updatePost(String postId, AddPostRequest request);
     String deletePost(String postId);
 }

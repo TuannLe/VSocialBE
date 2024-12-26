@@ -79,6 +79,14 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<PostResponse> getPostByAccountId(String accountId) {
+        List<Post> posts = postRepo.findPostsByAccountId(accountId);
+        return posts.stream()
+                .map(postMapper::toPostResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public PostResponse updatePost(String postId, AddPostRequest request) {
         return null;
     }
