@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.FriendRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
+import org.tuanle.vsocialbe.dto.response.AccountFriendResponse;
 import org.tuanle.vsocialbe.service.interfaces.IFriendService;
 
 import java.util.List;
@@ -31,25 +32,26 @@ public class FriendController {
                 .build();
     }
 
-    @PutMapping()
+    @PutMapping("/accept")
     public APIResponse<String> acceptFriend(@RequestBody FriendRequest request) {
         return APIResponse.<String>builder()
                 .result(friendService.acceptFriend(request))
                 .build();
     }
 
-    @DeleteMapping()
+    @PostMapping("/unfriend")
     public APIResponse<String> unFriend(@RequestBody FriendRequest request) {
+        System.out.println(request.getSenderId());
+        System.out.println(request.getReceiverId());
         return APIResponse.<String>builder()
                 .result(friendService.unFriend(request))
                 .build();
     }
 
-    @GetMapping()
-    public APIResponse<List<String>> getFriends() {
-        return APIResponse.<List<String>>builder()
-                .result(friendService.getFriendsRequest())
+    @GetMapping("/get-friends")
+    public APIResponse<List<AccountFriendResponse>> getFriends(@RequestParam String accountId) {
+        return APIResponse.<List<AccountFriendResponse>>builder()
+                .result(friendService.getFriendsRequest(accountId))
                 .build();
     }
-
 }

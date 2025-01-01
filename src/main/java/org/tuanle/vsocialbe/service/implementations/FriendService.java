@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.tuanle.vsocialbe.dto.request.FriendRequest;
+import org.tuanle.vsocialbe.dto.response.AccountFriendResponse;
 import org.tuanle.vsocialbe.entity.Friend;
 import org.tuanle.vsocialbe.enums.RelationshipStatus;
 import org.tuanle.vsocialbe.exception.AppException;
@@ -60,7 +61,7 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public List<String> getFriendsRequest() {
-        return List.of();
+    public List<AccountFriendResponse> getFriendsRequest(String accountId) {
+        return friendRepo.getFriendRequests(accountId);
     }
 }
