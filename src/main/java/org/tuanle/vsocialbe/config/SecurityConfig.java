@@ -25,12 +25,14 @@ public class SecurityConfig {
     protected String SIGNER_KEY;
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "api/v1/users/register",
-            "api/v1/users/all",
+            "api/v1/users/**",
+            "/api/v1/friend/**",
             "api/v1/auth/introspect",
             "api/v1/auth/login",
             "api/v1/auth/logout",
             "api/v1/auth/refresh",
+            "api/v1/post/**",
+            "/api/v1/comment/**",
             "ws/**"
     };
 
@@ -45,8 +47,8 @@ public class SecurityConfig {
 
         httpSecurity.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer -> jwtConfigurer
-                        .decoder(customJwtDecoder)
-                        .jwtAuthenticationConverter(jwtConverter()))
+                                .decoder(customJwtDecoder)
+                                .jwtAuthenticationConverter(jwtConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
         );
         httpSecurity.csrf(AbstractHttpConfigurer::disable);

@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.tuanle.vsocialbe.dto.request.AccountUpdateRequest;
 import org.tuanle.vsocialbe.dto.request.RegisterRequest;
+import org.tuanle.vsocialbe.dto.response.AccountFriendResponse;
 import org.tuanle.vsocialbe.dto.response.AccountResponse;
 import org.tuanle.vsocialbe.entity.Account;
 import org.tuanle.vsocialbe.enums.Role;
@@ -16,6 +17,7 @@ import org.tuanle.vsocialbe.exception.AppException;
 import org.tuanle.vsocialbe.exception.ErrorCode;
 import org.tuanle.vsocialbe.mapper.AccountMapper;
 import org.tuanle.vsocialbe.repositoty.AccountRepo;
+import org.tuanle.vsocialbe.repositoty.FriendRepo;
 import org.tuanle.vsocialbe.repositoty.RoleRepo;
 import org.tuanle.vsocialbe.service.interfaces.IAccountService;
 
@@ -75,8 +77,10 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public List<Account> findAccountByUsername(String username) {
-        return List.of();
+    public List<AccountFriendResponse> findAccountByKeyword(String accountId, String keyword) {
+        return accountRepo.findAllAccountsWithFriendStatusByKeyword(accountId, keyword);
+
+//        return accountRepo.searchAccounts(keyword).stream().map(accountMapper::toAccountResponse).toList();
     }
 }
 

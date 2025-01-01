@@ -66,6 +66,7 @@ public class AuthenticationService implements IAuthenticationService {
         var token = generateToken(account);
         return AuthenticationResponse.builder()
                 .token(token)
+                .accountId(account.getAccountId())
                 .isAuthenticated(true)
                 .build();
     }
@@ -134,6 +135,7 @@ public class AuthenticationService implements IAuthenticationService {
         Date expiration = (isRefresh)
                 ? new Date(signedJWT.getJWTClaimsSet().getIssueTime().toInstant().plus(REFRESH_DURATION, ChronoUnit.SECONDS).toEpochMilli())
                 : signedJWT.getJWTClaimsSet().getExpirationTime();
+        System.out.println(verified);
         if(!(verified && expiration.after(new Date()))){
             throw new AppException(ErrorCode.UNAUTHENTICATED);
         }

@@ -14,12 +14,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/post")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PostController {
     IPostService postService;
 
     @PostMapping
     public APIResponse<PostResponse> createPost(@ModelAttribute AddPostRequest request) {
+        System.out.println(request.getContent());
+        System.out.println(request.getAccountId());
         return APIResponse.<PostResponse>builder()
                 .result(postService.createPost(request))
                 .build();

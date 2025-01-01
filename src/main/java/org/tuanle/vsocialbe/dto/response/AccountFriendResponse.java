@@ -2,14 +2,17 @@ package org.tuanle.vsocialbe.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.tuanle.vsocialbe.enums.RelationshipStatus;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationResponse {
-    String token;
+public class AccountFriendResponse {
     String accountId;
-    boolean isAuthenticated;
+    String email;
+    String username;
+    String avatar;
+    RelationshipStatus status;
 }

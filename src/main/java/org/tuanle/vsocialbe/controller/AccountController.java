@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.RegisterRequest;
 import org.tuanle.vsocialbe.dto.request.AccountUpdateRequest;
 import org.tuanle.vsocialbe.dto.response.APIResponse;
+import org.tuanle.vsocialbe.dto.response.AccountFriendResponse;
 import org.tuanle.vsocialbe.dto.response.AccountResponse;
 import org.tuanle.vsocialbe.entity.Account;
 import org.tuanle.vsocialbe.service.interfaces.IAccountService;
@@ -42,12 +43,12 @@ public class AccountController {
                 .build();
     }
 
-//    @PostMapping
-//    public APIResponse<String> check(@RequestBody String token) {
-//        return APIResponse.<String>builder()
-//                .result(accountService.getMyInfo())
-//                .build();
-//    }
+    @GetMapping("/search")
+    public APIResponse<List<AccountFriendResponse>> searchAccounts(@RequestParam String accountId, @RequestParam(required = false) String keyword) {
+        return APIResponse.<List<AccountFriendResponse>>builder()
+                .result(accountService.findAccountByKeyword(accountId, keyword))
+                .build();
+    }
 
     @GetMapping("/{accountId}")
     public AccountResponse getById(@PathVariable String accountId) {

@@ -3,10 +3,7 @@ package org.tuanle.vsocialbe.controller;
 import com.nimbusds.jose.JOSEException;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.tuanle.vsocialbe.dto.request.AuthenticationRequest;
 import org.tuanle.vsocialbe.dto.request.IntrospectRequest;
 import org.tuanle.vsocialbe.dto.request.LogoutRequest;
@@ -21,6 +18,7 @@ import java.text.ParseException;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationController {
     IAuthenticationService authService;

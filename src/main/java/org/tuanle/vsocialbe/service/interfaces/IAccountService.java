@@ -2,6 +2,7 @@ package org.tuanle.vsocialbe.service.interfaces;
 
 import org.tuanle.vsocialbe.dto.request.AccountUpdateRequest;
 import org.tuanle.vsocialbe.dto.request.RegisterRequest;
+import org.tuanle.vsocialbe.dto.response.AccountFriendResponse;
 import org.tuanle.vsocialbe.dto.response.AccountResponse;
 import org.tuanle.vsocialbe.entity.Account;
 
@@ -12,7 +13,7 @@ public interface IAccountService {
 
     List<AccountResponse> getAll();
 
-    List<Account> findAccountByUsername(String username);
+    List<AccountFriendResponse> findAccountByKeyword(String accountId, String keyword);
 
     AccountResponse getById(String accountId);
 
