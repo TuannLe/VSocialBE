@@ -49,6 +49,13 @@ public class PostController {
                 .build();
     }
 
+    @GetMapping("/friend/{accountId}")
+    public APIResponse<List<PostResponse>> getPostFriendByUserID(@PathVariable String accountId) {
+        return APIResponse.<List<PostResponse>>builder()
+                .result(postService.getPostFriendByAccountId(accountId))
+                .build();
+    }
+
     @PostMapping("/{postId}")
     public APIResponse<PostResponse> updatePost(@PathVariable String postId, @RequestBody AddPostRequest request) {
         return null;

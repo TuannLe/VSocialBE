@@ -10,6 +10,7 @@ public interface IPostService {
     PostResponse getPostById(String postId);
     List<PostResponse> getAllPost();
     List<PostResponse> getPostByAccountId(String accountId);
+    List<PostResponse> getPostFriendByAccountId(String accountId);
     PostResponse updatePost(String postId, AddPostRequest request);
     String deletePost(String postId);
 }

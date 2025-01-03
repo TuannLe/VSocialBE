@@ -87,6 +87,14 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<PostResponse> getPostFriendByAccountId(String accountId) {
+        List<Post> posts = postRepo.findFriendPostsByAccountId(accountId);
+        return posts.stream()
+                .map(postMapper::toPostResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public PostResponse updatePost(String postId, AddPostRequest request) {
         return null;
     }

@@ -48,7 +48,7 @@ public class FriendController {
                 .build();
     }
 
-    @GetMapping("/get-friends")
+    @GetMapping("/get-friends-request")
     public APIResponse<List<AccountFriendResponse>> getFriends(@RequestParam String accountId) {
         return APIResponse.<List<AccountFriendResponse>>builder()
                 .result(friendService.getFriendsRequest(accountId))
